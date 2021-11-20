@@ -1,0 +1,15 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  StudentDB:
+    image: mongo
+    
+  student.api:
+    image: studentapi
+    build:
+      context: .
+      dockerfile: src/Services/Student.API/Dockerfile
+    ports:
+      - 80:80

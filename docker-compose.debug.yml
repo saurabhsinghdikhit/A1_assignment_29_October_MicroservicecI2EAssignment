@@ -1,0 +1,20 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  StudentDB:
+    container_name: StudentDB
+    restart: always
+    ports:
+      - "27017:27017"
+
+  student.api:
+    container_name: student.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://StudentDB:27017"
+    depends_on:
+      - StudentDB
+    ports:
+      - 8000:80
